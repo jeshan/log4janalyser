@@ -1,0 +1,57 @@
+19:47:40,530 [Thread-19] DEBUG [foo.bar.FooBarServlet]  - haha
+	     		       				  Exception in thread "main" java.lang.RuntimeException: Message
+								at Main.main(Main.java:4)
+                                                          	at com.vaadin.server.ServerRpcManager.applyInvocation(ServerRpcManager.java:170)
+                                                          	at com.vaadin.server.ServerRpcManager.applyInvocation(ServerRpcManager.java:118)
+                                                          	at com.vaadin.server.communication.ServerRpcHandler.handleBurst(ServerRpcHandler.java:214)
+                                                          	at com.vaadin.server.communication.ServerRpcHandler.handleRpc(ServerRpcHandler.java:111)
+                                                          	at com.vaadin.server.communication.UidlRequestHandler.synchronizedHandleRequest(UidlRequestHandler.java:91)
+                                                          	at com.vaadin.server.SynchronizedRequestHandler.handleRequest(SynchronizedRequestHandler.java:37)
+                                                          	at com.vaadin.server.VaadinService.handleRequest(VaadinService.java:1371)
+                                                          	at com.vaadin.server.VaadinServlet.service(VaadinServlet.java:238)
+                                                          	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+                                                          	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+                                                          	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+                                                          	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+                                                          	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+                                                          	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+                                                          	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+                                                          	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+                                                          	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+                                                          	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+                                                          	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+                                                          	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+                                                          	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+                                                          	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+                                                          	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+                                                          	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+                                                          	at java.lang.Thread.run(Thread.java:722)
+                                                          Caused by: java.lang.reflect.InvocationTargetException
+                                                          	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+                                                          	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+                                                          	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+                                                          	at java.lang.reflect.Method.invoke(Method.java:601)
+                                                          	at com.vaadin.server.ServerRpcManager.applyInvocation(ServerRpcManager.java:168)
+                                                          	... 24 more
+                                                          Caused by: com.vaadin.event.ListenerMethod$MethodException: Invocation of method buttonClick in co.jeshan.code.log4janalyser.ui.Components$Listeners$$anon$1 failed.
+                                                          	at com.vaadin.event.ListenerMethod.receiveEvent(ListenerMethod.java:528)
+                                                          	at com.vaadin.event.EventRouter.fireEvent(EventRouter.java:167)
+                                                          	at com.vaadin.server.AbstractClientConnector.fireEvent(AbstractClientConnector.java:969)
+                                                          	at com.vaadin.ui.Button.fireClick(Button.java:368)
+                                                          	at com.vaadin.ui.Button$1.click(Button.java:57)
+                                                          	... 29 more
+                                                          Caused by: java.lang.RuntimeException: msg
+                                                          	at co.jeshan.code.log4janalyser.ui.Components$Listeners$$anon$1.buttonClick(Components.scala:67)
+                                                          	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+                                                          	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+                                                          	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+                                                          	at java.lang.reflect.Method.invoke(Method.java:601)
+                                                          	at com.vaadin.event.ListenerMethod.receiveEvent(ListenerMethod.java:508)
+                                                          	... 33 more
+19:47:40,530 [Thread-19] DEBUG [foo.bar.FooBarServlet]  - pragma: no-cache
+19:47:40,530 [Thread-19] WARN [foo.bar.FooBarServlet]  - content-length: 409
+19:47:40,530 [Thread-19] DEBUG [foo.bar.FooBarServlet]  - username EXAMPLE/guest
+19:47:40,530 [Thread-19] FATAL [foo.bar.FooBarServlet]  - MISC: **************
+ContextPath: /FooApp
+19:47:40,530 [Thread-19] WARN [foo.bar.FooBarServlet]  - ServletPath: /service
+19:47:40,531 [Thread-19] DEBUG [gateway.filter.FooFilter]  - foo filter after pass through
