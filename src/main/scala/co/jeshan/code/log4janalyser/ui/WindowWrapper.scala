@@ -28,10 +28,11 @@
 
 package co.jeshan.code.log4janalyser.ui
 
+import _root_.com.vaadin.data.util.converter.Converter
 import _root_.com.vaadin.event.ItemClickEvent
 import _root_.com.vaadin.shared.ui.label.ContentMode
 import _root_.com.vaadin.ui.CustomTable.RowHeaderMode
-import _root_.java.util.Date
+import _root_.java.util.{Locale, Date}
 import _root_.org.tepi.filtertable.FilterTable
 import com.vaadin.ui.Button.{ClickEvent, ClickListener}
 
@@ -41,7 +42,7 @@ import co.jeshan.code.log4janalyser.utils.extended.{LoggingEventExtended, LogFil
 import org.apache.log4j.Logger
 import co.jeshan.code.log4janalyser.text.Strings
 import co.jeshan.code.log4janalyser.ui.WindowWrapper.Name
-import co.jeshan.code.log4janalyser.utils.Helpers
+import co.jeshan.code.log4janalyser.utils.{Formatters, Helpers}
 
 /**
  * User: jeshan
@@ -151,7 +152,6 @@ class WindowWrapper {
         logTable.setImmediate(true)
         logTable.setRowHeaderMode(RowHeaderMode.INDEX)
         logTable.setPageLength(Int.MaxValue)
-
         import Strings._
 
         logTable.addItemClickListener(new ItemClickEvent.ItemClickListener() {
@@ -266,6 +266,7 @@ object WindowWrapper {
         val receiver = findReceiver(uri)
         if (receiver.isDefined) {
             receiver.get.shutdown()
+            UI.getCurrent.setPollInterval(-1)
             receivers.remove(uri)
         }
     }
@@ -284,15 +285,28 @@ object WindowWrapper {
             table.setColumnCollapsed(column._1, true)
             table.setColumnWidth(column._1, -1)
         })
+
+        table.setConverter(dateHeader, DateConverter)
         table.setFilterDecorator(filterDecorator)
     }
 
     def printToTable(logTable: FilterTable, event: LoggingEventExtended) {
         val array: Array[AnyRef] = (columns.map(_._2._1(event).asInstanceOf[AnyRef]) ++ otherColumns.map(_._2._1(event).asInstanceOf[AnyRef])).toArray
-        UI.getCurrent.access(new Runnable {
+        UI.getCurrent.accessSynchronously(new Runnable {
             override def run() {
                 logTable.addItem(array, null)
             }
         })
     }
+
+    object DateConverter extends Converter[String, Date] {
+        def getPresentationType: Class[String] = classOf[String]
+
+        def getModelType: Class[Date] = classOf[Date]
+
+        def convertToPresentation(value: Date, targetType: Class[_ <: String], locale: Locale): String = if (value != null) Formatters.formatDate(value) else null
+
+        def convertToModel(value: String, targetType: Class[_ <: Date], locale: Locale): Date = if (value != null) Formatters.parseDate(value) else null
+    }
+
 }

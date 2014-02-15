@@ -32,6 +32,7 @@ import _root_.org.tepi.filtertable.FilterTable
 import org.apache.log4j.spi.LoggingEvent
 import org.apache.log4j.Logger
 import org.apache.log4j.chainsaw.LogFilePatternLayoutBuilder
+import co.jeshan.code.log4janalyser.ui.WindowWrapper
 
 /**
  * User: jeshan
@@ -44,8 +45,6 @@ class LogFilePatternReceiverExtended(url: String, log4jPattern: String, isTailin
     val defaultWaitMillis = 500
 
     val log = Logger.getLogger(getClass)
-
-    val actor = new LoggingEventActor(this, table)
 
     setFileURL(url)
     setLogFormat(LogFilePatternLayoutBuilder.getLogFormatFromPatternLayout(log4jPattern))
@@ -66,16 +65,17 @@ class LogFilePatternReceiverExtended(url: String, log4jPattern: String, isTailin
 
     override def doPost(event: LoggingEvent) = {
         val eventExtended = LoggingEventExtended.create(event)
-        actor ! eventExtended
+        WindowWrapper.printToTable(table, eventExtended)
     }
 
     override def shutdown() {
         super.shutdown()
-        actor ! Shutdown
+        if(isTailing) {
+            log.info(s"Stopping listening events for $url")
+        }
     }
 
     def readFileAsync() {
-        actor.start()
         activateOptions()
     }
 

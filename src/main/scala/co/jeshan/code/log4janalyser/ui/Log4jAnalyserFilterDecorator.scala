@@ -34,6 +34,7 @@ import org.tepi.filtertable.numberfilter.NumberFilterPopupConfig
 import java.io.Serializable
 import java.text.DateFormat
 import java.util.Locale
+import co.jeshan.code.log4janalyser.utils.Formatters
 
 class Log4jAnalyserFilterDecorator extends FilterDecorator with Serializable {
     def getEnumFilterDisplayName(propertyId: AnyRef, value: AnyRef): String = null
@@ -86,7 +87,7 @@ class Log4jAnalyserFilterDecorator extends FilterDecorator with Serializable {
         true
     }
 
-    override def getDateFormatPattern(propertyId: AnyRef): String = null //Formatters.uiFormat.toPattern
+    override def getDateFormatPattern(propertyId: AnyRef): String = Formatters.iso8601Format.toPattern
 
     override def getLocale: Locale = Locale.UK
 

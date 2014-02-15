@@ -60,7 +60,6 @@
             <param-name>widgetset</param-name>
             <param-value>co.jeshan.code.log4janalyser.ui.widgetset.Log4jAnalyserWidgetSet</param-value>
         </init-param>
-        <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>
         <servlet-name>Log4janalyser Application</servlet-name>

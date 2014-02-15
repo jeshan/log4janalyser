@@ -38,10 +38,11 @@ import _root_.com.vaadin.annotations.{Push, Theme}
  * Time: 19:18
  */
 @Theme("log4janalyser")
-@Push
 class Log4jAnalyserUI extends UI {
 
     protected def init(vaadinRequest: VaadinRequest) {
+        setPollInterval(1000)
+
         val wrapper = new WindowWrapper
         setContent(wrapper.window)
     }

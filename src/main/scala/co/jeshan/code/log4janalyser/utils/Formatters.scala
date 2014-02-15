@@ -28,6 +28,7 @@
 package co.jeshan.code.log4janalyser.utils
 
 import _root_.java.text.SimpleDateFormat
+import _root_.java.util
 import _root_.java.util.Date
 
 /**
@@ -36,13 +37,10 @@ import _root_.java.util.Date
  * Time: 14:36
  */
 object Formatters {
-    val iso8601Format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
 
-    def formatDate(date: Date) = iso8601Format.format(date)
+    val iso8601Format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z")
 
-    def parse(text: String) = iso8601Format.parse(text).getTime
-
-    val uiFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z")
-
-    def parseUi(millis: Long) = uiFormat.format(new Date(millis))
+    def formatDate(date: Date = new util.Date()) = iso8601Format.format(date)
+    
+    def parseDate(text: String) = iso8601Format.parse(text)
 }
