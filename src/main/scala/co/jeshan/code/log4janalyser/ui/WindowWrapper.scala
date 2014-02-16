@@ -101,7 +101,7 @@ class WindowWrapper {
         }
     }
 
-    def getInputPath = "file://" + inputPathField.getValue
+    def getInputPath = if (inputPathField.getValue.contains(":")) inputPathField.getValue else "file://" + inputPathField.getValue
 
     def initUi() {
         log4jPatternField.setValue(defaultLog4jPattern)
